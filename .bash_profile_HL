@@ -14,13 +14,12 @@ desk_path=$HOME/Desktop
 multi_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS/Unity/MultiplayerTanks/Assets/Scripts
 snake_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS/Unity/SnakeV2/Assets/_Scripts
 journal_path=$HOME/Dropbox/Main/Primary/Journal
-setup_path=$HOME/.ben-mac-setup
+setup_path=$HOME/macsetup
 
 # Edit Specific Files
 alias bashprof="vim $HOME/.bash_profile"
 alias vimrc="vim $HOME/.vimrc"
-alias short="code $HOME/.shortcuts.txt"
-alias packages="vim $HOME/.ben-packages.txt"
+alias short="code $setup_path/shortcuts.txt"
 alias vscset="code $HOME/Library/Application\ Support/Code/User/settings.json"
 alias jevent="code $journal_path/events.txt"
 alias mega="code $journal_path/mega-recollection.txt"
@@ -42,11 +41,12 @@ alias orepos="open $repos_path"
 alias odesk="open $desk_path"
 alias omulti="open $multi_path"
 alias osetup="open $setup_path"
+
 # List Files.
 alias ls="ls -G"
 alias list="ls -l"
 alias listall="ls -al"
-alias listhid="ls -a | grep '^\.'"
+alias listhid="ls -al | grep '^\.'"
 
 # List files of type. 
 alias listtype="list_type_f $1"
