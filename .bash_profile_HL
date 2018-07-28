@@ -1,0 +1,121 @@
+# added by Anaconda3 5.0.1 installer
+export PATH="$HOME/anaconda3/bin:$PATH"
+
+# Enable Color
+export CLICOLOR=1
+export LESS="-eirMX"
+
+# I am very lazy
+alias boy="tldr"
+
+# Specific Directory Paths
+repos_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS
+desk_path=$HOME/Desktop
+multi_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS/Unity/MultiplayerTanks/Assets/Scripts
+snake_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS/Unity/SnakeV2/Assets/_Scripts
+journal_path=$HOME/Dropbox/Main/Primary/Journal
+setup_path=$HOME/.ben-mac-setup
+
+# Edit Specific Files
+alias bashprof="vim $HOME/.bash_profile"
+alias vimrc="vim $HOME/.vimrc"
+alias short="code $HOME/.shortcuts.txt"
+alias packages="vim $HOME/.ben-packages.txt"
+alias vscset="code $HOME/Library/Application\ Support/Code/User/settings.json"
+alias jevent="code $journal_path/events.txt"
+alias mega="code $journal_path/mega-recollection.txt"
+
+# Reload Bash Profile
+alias reload="source $HOME/.bash_profile"
+
+# Change Directory to Specific Paths
+alias repos="cd $repos_path"
+alias desk="cd $desk_path"
+alias multi="cd $multi_path"
+alias snake="cd $snake_path"
+alias home="cd $HOME"
+alias setup="cd $setup_path"
+
+# Open Directory in Finder.
+alias ohome="open $HOME"
+alias orepos="open $repos_path"
+alias odesk="open $desk_path"
+alias omulti="open $multi_path"
+alias osetup="open $setup_path"
+# List Files.
+alias ls="ls -G"
+alias list="ls -l"
+alias listall="ls -al"
+alias listhid="ls -a | grep '^\.'"
+
+# List files of type. 
+alias listtype="list_type_f $1"
+function list_type_f {
+	list *.$1
+}
+
+# Change, clear, list. 
+alias cl="clear && list"
+alias ccl="ccl_f $1"
+function ccl_f {
+	cd $1
+	clear
+	list
+}
+
+# Window Manager
+function grab_windows {
+	cd /Users/BenPinzone/Documents/@MAIN_DOCUMENTS/@REPOS/Other/WindowManager
+	python ./grab.py $1 
+
+}
+function grab_windows_e {
+	grab_windows $1
+	exit
+}
+function set_windows {
+	cd /Users/BenPinzone/Documents/@MAIN_DOCUMENTS/@REPOS/Other/WindowManager
+	python ./set.py $1 
+}
+function set_windows_e {
+	set_windows $1
+	exit
+}
+alias sw="grab_windows $1"
+alias mw="set_windows $1"
+alias swe="grab_windows_e $1"
+alias mwe="set_windows_e $1"
+
+# Remove Actions
+alias caen="ssh bpinzone@login.engin.umich.edu"
+alias caenfile="sftp bpinzone@login.engin.umich.edu"
+
+# Git
+alias gs="git status"
+alias gb="git branch"
+alias gd="git diff"
+
+# Grep
+alias greptype="grep_type_f $1 $2 $3 $4 $5"
+function grep_type_f {
+	grep -r -n --include="*.$1" $2 . --color=always $3 $4 $5 | less
+}
+alias allgrep="greptype * $1 $2 $3 $4"
+alias csgrep="greptype cs $1 $2 $3 $4"
+alias pygrep="greptype py $1 $2 $3 $4"
+alias cppgrep="greptype cpp $1 $2 $3 $4"
+alias hgrep="greptype h $1 $2 $3 $4"
+
+# Find
+alias findindir="find_in_dir_f $1"
+function find_in_dir_f {
+	text=$1
+	search="*"
+	search+=$text
+	search+="*"
+	find . -iname $search 
+}
+
+# Sublime Shortcut
+alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl $1"
+
