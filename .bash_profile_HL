@@ -46,22 +46,19 @@ alias osetup="open $setup_path"
 alias ls="ls -G"
 alias list="ls -l"
 alias listall="ls -al"
-alias listhid="ls -al | grep '^\.'"
+alias listhid="ls -ld .?*"
 
 # List files of type. 
-alias listtype="list_type_f $1"
-function list_type_f {
-	list *.$1
+function listtype {
+	# Usage: listtype <file_extension>"
+	local search_pattern=".*\.$1"
+	local exclude_pattern="\.\."
+	ls -al | grep -E "$search_pattern" | grep -E -v "$exclude_pattern"
 }
 
 # Change, clear, list. 
 alias cl="clear && list"
-alias ccl="ccl_f $1"
-function ccl_f {
-	cd $1
-	clear
-	list
-}
+alias ccl='cd "$1" && clear && list'
 
 # Window Manager
 function grab_windows {
@@ -96,24 +93,26 @@ alias gb="git branch"
 alias gd="git diff"
 
 # Grep
-alias greptype="grep_type_f $1 $2 $3 $4 $5"
-function grep_type_f {
-	grep -r -n --include="*.$1" $2 . --color=always $3 $4 $5 | less
+GREP_FLAGS="-r -n --color=always"
+function greptype {
+	# Usage: greptype <file_extension> <search_text> <other flags> <other flags>...
+	local file_type="$1" && shift
+	local search_text="$1" && shift
+	if [ "$file_type" == "all" ] ; then
+		grep $GREP_FLAGS --include="*" "$search_text" . $@
+	else
+		grep $GREP_FLAGS --include="*.$file_type" "$search_text" . $@
+	fi
 }
-alias allgrep="greptype * $1 $2 $3 $4"
-alias csgrep="greptype cs $1 $2 $3 $4"
-alias pygrep="greptype py $1 $2 $3 $4"
-alias cppgrep="greptype cpp $1 $2 $3 $4"
-alias hgrep="greptype h $1 $2 $3 $4"
+alias allgrep="greptype all $1 $@"
+alias csgrep="greptype cs $1 $@"
+alias pygrep="greptype py $1 $@"
+alias cppgrep="greptype cpp $1 $@"
+alias hgrep="greptype h $1 $@"
 
 # Find
-alias findindir="find_in_dir_f $1"
-function find_in_dir_f {
-	text=$1
-	search="*"
-	search+=$text
-	search+="*"
-	find . -iname $search 
+function findindir {
+	find . -iname "*$1*"
 }
 
 # Sublime Shortcut
