@@ -5,60 +5,63 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 export CLICOLOR=1
 export LESS="-eirMX"
 
+# Misc
+alias reload="source $HOME/.bash_profile" # Reload bash profile.
+function ce {
+	touch $1
+	vim $1
+}
+
 # I am very lazy
 alias boy="tldr"
 
 # Specific Directory Paths
-repos_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS
 desk_path=$HOME/Desktop
-multi_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS/Unity/MultiplayerTanks/Assets/Scripts
-snake_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS/Unity/SnakeV2/Assets/_Scripts
 journal_path=$HOME/Dropbox/Main/Primary/Journal
-setup_path=$HOME/macsetup
+repos_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS
+multi_path=$repos_path/Unity/MultiplayerTanks
+snake_path=$repos_path/Unity/SnakeV2
+macsetup_path=$repos_path/MyComputer/macsetup
+dotfiles_path=$repos_path/MyComputer/dotfiles
+web_path=$repos_path/Web/bpinzonegithubio
 
 # Edit Specific Files
 alias bashprof="vim $HOME/.bash_profile"
 alias vimrc="vim $HOME/.vimrc"
-alias short="code $setup_path/shortcuts.txt"
-alias vscset="code $HOME/Library/Application\ Support/Code/User/settings.json"
+alias todo="vim $macsetup_path/todo.txt"
+alias commands="vim $macsetup_path/commands.txt"
+alias short="code $macsetup_path/shortcuts.txt"
 alias jevent="code $journal_path/events.txt"
 alias mega="code $journal_path/mega-recollection.txt"
 
-# Reload Bash Profile
-alias reload="source $HOME/.bash_profile"
-
 # Change Directory to Specific Paths
-alias repos="cd $repos_path"
+alias home="cd $HOME"
 alias desk="cd $desk_path"
+alias repos="cd $repos_path"
 alias multi="cd $multi_path"
 alias snake="cd $snake_path"
-alias home="cd $HOME"
-alias setup="cd $setup_path"
-
-# Open Directory in Finder.
-alias ohome="open $HOME"
-alias orepos="open $repos_path"
-alias odesk="open $desk_path"
-alias omulti="open $multi_path"
-alias osetup="open $setup_path"
+alias macsetup="cd $macsetup_path"
+alias dotfiles="cd $dotfiles_path"
+alias web="cd $web_path"
+alias o="open ./" # Open working directory in finder.
 
 # List Files.
 alias ls="ls -G"
-alias list="ls -l"
-alias listall="ls -al"
-alias listhid="ls -ld .?*"
-
-# List files of type. 
-function listtype {
-	# Usage: listtype <file_extension>"
+alias l="ls -l"          # Preferred format.
+alias la="ls -al"        # List all.
+alias lh="ls -ld .?*"    # List hidden only.
+alias cl="clear && l"
+alias cla="clear && la"
+alias clh="clear && lh"
+alias ccl='cd "$1" && clear && l'
+function lt {
+	# List files of a certain type.
+	# Usage: ltype <file_extension>"
 	local search_pattern=".*\.$1"
+	local search_pattern="\.$1$"
 	local exclude_pattern="\.\."
 	ls -al | grep -E "$search_pattern" | grep -E -v "$exclude_pattern"
 }
-
-# Change, clear, list. 
-alias cl="clear && list"
-alias ccl='cd "$1" && clear && list'
 
 # Window Manager
 function grab_windows {
@@ -85,6 +88,7 @@ alias mwe="set_windows_e $1"
 
 # Remove Actions
 alias caen="ssh bpinzone@login.engin.umich.edu"
+alias work="ssh work"
 alias caenfile="sftp bpinzone@login.engin.umich.edu"
 
 # Git
@@ -93,8 +97,10 @@ alias gb="git branch"
 alias gd="git diff"
 
 # Grep
-GREP_FLAGS="-r -n --color=always"
-function greptype {
+GREP_FLAGS="-r -n --color=auto"
+alias grep="grep $GREP_FLAGS"
+function gt {
+	# Grep files of certain type.
 	# Usage: greptype <file_extension> <search_text> <other flags> <other flags>...
 	local file_type="$1" && shift
 	local search_text="$1" && shift
@@ -104,16 +110,25 @@ function greptype {
 		grep $GREP_FLAGS --include="*.$file_type" "$search_text" . $@
 	fi
 }
-alias allgrep="greptype all $1 $@"
-alias csgrep="greptype cs $1 $@"
-alias pygrep="greptype py $1 $@"
-alias cppgrep="greptype cpp $1 $@"
-alias hgrep="greptype h $1 $@"
+alias allgrep="gt all $1 $@"
+alias csgrep="gt cs $1 $@"
+alias pygrep="gt py $1 $@"
+alias cppgrep="gt cpp $1 $@"
+alias hgrep="gt h $1 $@"
 
 # Find
 function findindir {
 	find . -iname "*$1*"
 }
+
+# VS Code Shortcuts
+# Reminders
+# code . // Open current folder in vscode.
+# code --add <dir> // Adds dir folder to last active window.
+alias vsdiff="code --diff $1 $2"
+
+# Unity Shortcut
+alias scripts="cd Assets/Scripts/"
 
 # Sublime Shortcut
 alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl $1"
