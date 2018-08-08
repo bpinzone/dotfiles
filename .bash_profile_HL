@@ -18,17 +18,18 @@ alias boy="tldr"
 # Specific Directory Paths
 desk_path=$HOME/Desktop
 journal_path=$HOME/Dropbox/Main/Primary/Journal
-repos_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS
+repos_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS # REPOS: notes.txt and readme.txt - Nothing else
 multi_path=$repos_path/Unity/MultiplayerTanks
 snake_path=$repos_path/Unity/SnakeV2
 macsetup_path=$repos_path/MyComputer/macsetup
 dotfiles_path=$repos_path/MyComputer/dotfiles
 web_path=$repos_path/Web/bpinzonegithubio
+window_path=$repos_path/Other/WindowManager
 
 # Edit Specific Files
 alias bashprof="vim $HOME/.bash_profile"
 alias vimrc="vim $HOME/.vimrc"
-alias todo="vim $macsetup_path/todo.txt"
+alias todo="vim $macsetup_path/notes.txt"
 alias commands="vim $macsetup_path/commands.txt"
 alias short="code $macsetup_path/shortcuts.txt"
 alias jevent="code $journal_path/events.txt"
@@ -43,6 +44,10 @@ alias snake="cd $snake_path"
 alias macsetup="cd $macsetup_path"
 alias dotfiles="cd $dotfiles_path"
 alias web="cd $web_path"
+alias window="cd $window_path"
+function 28x {
+	cd $repos_path/C++/EECS_28${1}/EECS28${1}P${2}
+}
 alias o="open ./" # Open working directory in finder.
 
 # List Files.
@@ -64,31 +69,32 @@ function lt {
 }
 
 # Window Manager
-function grab_windows {
+function sw {
+	# Save Window Positions
 	cd /Users/BenPinzone/Documents/@MAIN_DOCUMENTS/@REPOS/Other/WindowManager
 	python ./grab.py $1 
 
 }
-function grab_windows_e {
+function swe {
+	# Save and Exit	
 	grab_windows $1
 	exit
 }
-function set_windows {
+function mw {
+	# Move Window Positions
 	cd /Users/BenPinzone/Documents/@MAIN_DOCUMENTS/@REPOS/Other/WindowManager
 	python ./set.py $1 
 }
-function set_windows_e {
+function mwe {
+	# Move and exit
 	set_windows $1
 	exit
 }
-alias sw="grab_windows $1"
-alias mw="set_windows $1"
-alias swe="grab_windows_e $1"
-alias mwe="set_windows_e $1"
 
-# Remove Actions
+# Remote Actions
 alias caen="ssh bpinzone@login.engin.umich.edu"
 alias work="ssh work"
+alias namecheap="ssh namecheap"
 alias caenfile="sftp bpinzone@login.engin.umich.edu"
 
 # Git
@@ -117,7 +123,8 @@ alias cppgrep="gt cpp $1 $@"
 alias hgrep="gt h $1 $@"
 
 # Find
-function findindir {
+function fid {
+	# Find in directory
 	find . -iname "*$1*"
 }
 
@@ -129,7 +136,18 @@ alias vsdiff="code --diff $1 $2"
 
 # Unity Shortcut
 alias scripts="cd Assets/Scripts/"
-
+function clean_unity {
+	if [ -d "Library" ]; then
+		rm -r Library
+	fi
+	if [ -d "Temp" ]; then
+		rm -r Temp
+	fi
+	if [ -d "obj" ]; then
+		rm -r obj
+	fi
+}
 # Sublime Shortcut
 alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl $1"
+
 
