@@ -35,6 +35,22 @@ alias short="code $macsetup_path/shortcuts.txt"
 alias jevent="code $journal_path/events.txt"
 alias mega="code $journal_path/mega-recollection.txt"
 
+# Manage Files
+resume_name="Ben_Pinzone_Resume.pdf"
+resume_origin_path=$HOME/Documents/@MAIN_DOCUMENTS/Resume_and_College_Stuff/Newest_Resume/
+resume_repo_path=$repos_path/Other/Resume/
+resume_web_path=$web_path/downloads/
+function sync_resume {
+	if [ -f ${resume_repo_path}${resume_name} ]; then
+		rm ${resume_repo_path}${resume_name}
+	fi
+	if [ -f ${resume_web_path}${resume_name} ]; then
+		rm ${resume_web_path}${resume_name}
+	fi
+	cp $resume_origin_path$resume_name $resume_repo_path
+	cp $resume_origin_path$resume_name $resume_web_path
+}	
+
 # Change Directory to Specific Paths
 alias home="cd $HOME"
 alias desk="cd $desk_path"
@@ -147,7 +163,55 @@ function clean_unity {
 		rm -r obj
 	fi
 }
+
 # Sublime Shortcut
 alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl $1"
 
-
+# Prompt
+# http://ezprompt.net
+# get current branch in git repo
+function parse_git_branch() {
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		STAT=`parse_git_dirty`
+		echo "[${BRANCH}${STAT}]"
+	else
+		echo ""
+	fi
+}
+# get current status of git repo
+function parse_git_dirty {
+	status=`git status 2>&1 | tee`
+	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
+	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
+	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
+	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
+	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
+	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+	bits=''
+	if [ "${renamed}" == "0" ]; then
+		bits=">${bits}"
+	fi
+	if [ "${ahead}" == "0" ]; then
+		bits="*${bits}"
+	fi
+	if [ "${newfile}" == "0" ]; then
+		bits="+${bits}"
+	fi
+	if [ "${untracked}" == "0" ]; then
+		bits="?${bits}"
+	fi
+	if [ "${deleted}" == "0" ]; then
+		bits="x${bits}"
+	fi
+	if [ "${dirty}" == "0" ]; then
+		bits="!${bits}"
+	fi
+	if [ ! "${bits}" == "" ]; then
+		echo " ${bits}"
+	else
+		echo ""
+	fi
+}
+export PS1="\[\e[37m\]\u\[\e[m\]\[\e[31m\]@\[\e[m\]\[\e[37m\]\h\[\e[m\]\[\e[31;40m\]>\[\e[m\]\[\e[31m\]>\[\e[m\]\[\e[37m\]\W\[\e[m\]\[\e[31m\]:\[\e[m\]\[\e[37m\]\`parse_git_branch\`\[\e[m\] "
