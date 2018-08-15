@@ -8,15 +8,16 @@ export LESS="-eirMX"
 # Misc
 alias reload="source $HOME/.bash_profile" # Reload bash profile.
 function ce {
+	# Create and edit.
 	touch $1
 	vim $1
 }
-
-# I am very lazy
+alias tree="tree -L "
 alias boy="tldr"
 
 # Specific Directory Paths
 desk_path=$HOME/Desktop
+downloads_path=$HOME/Downloads
 journal_path=$HOME/Dropbox/Main/Primary/Journal
 repos_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS # REPOS: notes.txt and readme.txt - Nothing else
 multi_path=$repos_path/Unity/MultiplayerTanks
@@ -25,6 +26,10 @@ macsetup_path=$repos_path/MyComputer/macsetup
 dotfiles_path=$repos_path/MyComputer/dotfiles
 web_path=$repos_path/Web/bpinzonegithubio
 window_path=$repos_path/Other/WindowManager
+vsccpp_path=$repos_path/vsccpp/
+pinzone_w_path=$HOME/Dropbox/Main/Notes/pinzone_w.csv
+vim_cheat_path=$HOME/Dropbox/Main/Primary/Pro_Programming/vim_cheatsheet.txt
+bitbar_path=$HOME/Documents/BitBarPluggins
 
 # Edit Specific Files
 alias bashprof="vim $HOME/.bash_profile"
@@ -36,6 +41,15 @@ alias jevent="code $journal_path/events.txt"
 alias mega="code $journal_path/mega-recollection.txt"
 
 # Manage Files
+# Clean VSCode C++ Project
+# Delete git repo stuff though. 
+function create_vsccpp {
+	cp -r $vsccpp_path ./new_vsccpp_project
+	rm -f ./new_vsccpp_project/.gitignore
+	rm -rf ./new_vsccpp_project/.git
+	rm -f ./new_vsccpp_project/readme.txt
+}
+# Resume
 resume_name="Ben_Pinzone_Resume.pdf"
 resume_origin_path=$HOME/Documents/@MAIN_DOCUMENTS/Resume_and_College_Stuff/Newest_Resume/
 resume_repo_path=$repos_path/Other/Resume/
@@ -54,6 +68,7 @@ function sync_resume {
 # Change Directory to Specific Paths
 alias home="cd $HOME"
 alias desk="cd $desk_path"
+alias down="cd $downloads_path"
 alias repos="cd $repos_path"
 alias multi="cd $multi_path"
 alias snake="cd $snake_path"
@@ -61,8 +76,15 @@ alias macsetup="cd $macsetup_path"
 alias dotfiles="cd $dotfiles_path"
 alias web="cd $web_path"
 alias window="cd $window_path"
+alias vsccpp="cd $vsccpp_path"
+alias bitbar="cd $bitbar_path"
+alias workdb="cd $HOME/Dropbox/Work"
 function 28x {
 	cd $repos_path/C++/EECS_28${1}/EECS28${1}P${2}
+}
+function c28x {
+	28x $1 $2
+	code .
 }
 alias o="open ./" # Open working directory in finder.
 
@@ -117,6 +139,8 @@ alias caenfile="sftp bpinzone@login.engin.umich.edu"
 alias gs="git status"
 alias gb="git branch"
 alias gd="git diff"
+alias eig="vim .gitignore"
+alias egig="vim $HOME/.gitignore_global"
 
 # Grep
 GREP_FLAGS="-r -n --color=auto"
@@ -137,6 +161,14 @@ alias csgrep="gt cs $1 $@"
 alias pygrep="gt py $1 $@"
 alias cppgrep="gt cpp $1 $@"
 alias hgrep="gt h $1 $@"
+# Grep Specific Files
+function wpg {
+	grep -i -C5 $1 $pinzone_w_path
+}
+alias viewvimcheat="vim $vim_cheat_path"
+function vimcheat {
+	grep -i -C1 $1 $vim_cheat_path
+}
 
 # Find
 function fid {
