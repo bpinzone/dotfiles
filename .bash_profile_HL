@@ -119,11 +119,13 @@ function after_window {
 	cd $DIR_BEFORE_WINDOW_MANAGER_COMMAND
 }
 function sw {
+	# Save Windows
 	before_window
 	python3 ./window_manager/grab.py $1
 	after_window
 }
 function mw {
+	# Move Windows
 	before_window
 	python3 ./window_manager/set.py $1
 	after_window
