@@ -1,6 +1,3 @@
-# added by Anaconda3 5.0.1 installer
-export PATH="$HOME/anaconda3/bin:$PATH"
-
 # Enable Color
 export CLICOLOR=1
 export LESS="-eirMX"
@@ -39,6 +36,7 @@ alias commands="vim $macsetup_path/commands.txt"
 alias short="code $macsetup_path/shortcuts.txt"
 alias jevent="code $journal_path/events.txt"
 alias mega="code $journal_path/mega-recollection.txt"
+alias pinzone_w="vim $pinzone_w_path"
 
 # Manage Files
 # Clean VSCode C++ Project
@@ -88,6 +86,9 @@ function c28x {
 }
 alias o="open ./" # Open working directory in finder.
 
+# Running
+alias runcpp="clear && make clean && make && ./main"
+
 # List Files.
 alias ls="ls -G"
 alias l="ls -l"          # Preferred format.
@@ -107,26 +108,25 @@ function lt {
 }
 
 # Window Manager
-function sw {
-	# Save Window Positions
-	cd /Users/BenPinzone/Documents/@MAIN_DOCUMENTS/@REPOS/Other/WindowManager
-	python ./grab.py $1 
-
+window_env_path=$window_path/window-env
+function before_window {
+	DIR_BEFORE_WINDOW_MANAGER_COMMAND=$(pwd)
+	cd $window_env_path
+	source ./bin/activate
 }
-function swe {
-	# Save and Exit	
-	grab_windows $1
-	exit
+function after_window {
+	deactivate
+	cd $DIR_BEFORE_WINDOW_MANAGER_COMMAND
+}
+function sw {
+	before_window
+	python3 ./window_manager/grab.py $1
+	after_window
 }
 function mw {
-	# Move Window Positions
-	cd /Users/BenPinzone/Documents/@MAIN_DOCUMENTS/@REPOS/Other/WindowManager
-	python ./set.py $1 
-}
-function mwe {
-	# Move and exit
-	set_windows $1
-	exit
+	before_window
+	python3 ./window_manager/set.py $1
+	after_window
 }
 
 # Remote Actions
@@ -162,8 +162,11 @@ alias pygrep="gt py $1 $@"
 alias cppgrep="gt cpp $1 $@"
 alias hgrep="gt h $1 $@"
 # Grep Specific Files
-function wpg {
+function pinzone_w_grep {
 	grep -i -C5 $1 $pinzone_w_path
+}
+function bashprof_grep {
+	grep -i -C1 $1 $HOME/.bash_profile
 }
 alias viewvimcheat="vim $vim_cheat_path"
 function vimcheat {
