@@ -1,4 +1,4 @@
 :inoremap jk <Esc>
 :syntax on
 :colorscheme delek
-set number
+:set number

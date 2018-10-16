@@ -2,8 +2,13 @@
 export CLICOLOR=1
 export LESS="-eirMX"
 
+# For Scheme
+PATH=$PATH:/Applications/Racket\ v7.0/bin
+
 # Misc
 alias reload="source $HOME/.bash_profile" # Reload bash profile.
+alias python='echo "Recall- python aliased to python3" && python3'
+alias p="python"
 function ce {
 	# Create and edit.
 	touch $1
@@ -27,6 +32,7 @@ vsccpp_path=$repos_path/vsccpp/
 pinzone_w_path=$HOME/Dropbox/Main/Notes/pinzone_w.csv
 vim_cheat_path=$HOME/Dropbox/Main/Primary/Pro_Programming/vim_cheatsheet.txt
 bitbar_path=$HOME/Documents/BitBarPluggins
+lec_281_path=$HOME/Documents/@MAIN_DOCUMENTS/College/UM/Fall2017/EECS281NonRepo
 
 # Edit Specific Files
 alias bashprof="vim $HOME/.bash_profile"
@@ -40,7 +46,7 @@ alias pinzone_w="vim $pinzone_w_path"
 
 # Manage Files
 # Clean VSCode C++ Project
-# Delete git repo stuff though. 
+# Except delete git repo.
 function create_vsccpp {
 	cp -r $vsccpp_path ./new_vsccpp_project
 	rm -f ./new_vsccpp_project/.gitignore
@@ -77,17 +83,28 @@ alias window="cd $window_path"
 alias vsccpp="cd $vsccpp_path"
 alias bitbar="cd $bitbar_path"
 alias workdb="cd $HOME/Dropbox/Work"
-function 28x {
-	cd $repos_path/C++/EECS_28${1}/EECS28${1}P${2}
+alias lec_281="cd $lec_281_path"
+
+alias o="open ./" # Open working directory in finder.
+function pj {
+	# cd to <class> <project> directory
+	# Usage pj <class number> <project number>
+	cd $repos_path/Classes/EECS${1}/EECS${1}P${2}
 }
-function c28x {
-	28x $1 $2
+function pjc {
+	# Open project in VSCode.
+	pj $1 $2
 	code .
 }
-alias o="open ./" # Open working directory in finder.
+function pjo {
+	# Open project in Finder.
+	pj $1 $2
+	o
+}
+alias 490hw="cd $HOME/Documents/@MAIN_DOCUMENTS/College/UM/Fall2018/490nonrepo/hw"
 
 # Running
-alias runcpp="clear && make clean && make && ./main"
+alias rcp="clear && make clean && make && ./main"
 
 # List Files.
 alias ls="ls -G"
@@ -133,6 +150,8 @@ function mw {
 
 # Remote Actions
 alias caen="ssh bpinzone@login.engin.umich.edu"
+alias caenb1="ssh bpinzone@login.itd.umich.edu"
+
 alias work="ssh work"
 alias namecheap="ssh namecheap"
 alias caenfile="sftp bpinzone@login.engin.umich.edu"
@@ -187,7 +206,7 @@ function fid {
 # code --add <dir> // Adds dir folder to last active window.
 alias vsdiff="code --diff $1 $2"
 
-# Unity Shortcut
+# Unity Clean Shortcut
 alias scripts="cd Assets/Scripts/"
 function clean_unity {
 	if [ -d "Library" ]; then
