@@ -29,8 +29,9 @@ dotfiles_path=$repos_path/MyComputer/dotfiles
 web_path=$repos_path/Web/bpinzonegithubio
 window_path=$repos_path/Other/WindowManager
 vsccpp_path=$repos_path/vsccpp/
+pro_path=$repos_path/Other/Pro_Programming
 pinzone_w_path=$HOME/Dropbox/Main/Notes/pinzone_w.csv
-vim_cheat_path=$HOME/Dropbox/Main/Primary/Pro_Programming/vim_cheatsheet.txt
+vim_cheat_path=$pro_path/vim_cheatsheet.txt
 bitbar_path=$HOME/Documents/BitBarPluggins
 lec_281_path=$HOME/Documents/@MAIN_DOCUMENTS/College/UM/Fall2017/EECS281NonRepo
 
