@@ -14,8 +14,19 @@ function ce {
 	touch $1
 	vim $1
 }
+function cc {
+	# Create and edit.
+	touch $1
+	code $1
+}
 alias tree="tree -L "
 alias boy="tldr"
+
+# Working Reset
+function true_reset {
+	clear && printf '\e[3J'
+}
+alias reset="true_reset"
 
 # Specific Directory Paths
 desk_path=$HOME/Desktop
@@ -272,3 +283,7 @@ function parse_git_dirty {
 	fi
 }
 export PS1="\[\e[37m\]\u\[\e[m\]\[\e[31m\]@\[\e[m\]\[\e[37m\]\h\[\e[m\]\[\e[31;40m\]>\[\e[m\]\[\e[31m\]>\[\e[m\]\[\e[37m\]\W\[\e[m\]\[\e[31m\]:\[\e[m\]\[\e[37m\]\`parse_git_branch\`\[\e[m\] "
+
+# Remove last login info.
+reset
+
