@@ -2,25 +2,24 @@
 export CLICOLOR=1
 export LESS="-eirMX"
 
-# For Scheme
-PATH=$PATH:/Applications/Racket\ v7.0/bin
-
 # Misc
 alias reload="source $HOME/.bash_profile" # Reload bash profile.
 alias python='echo "Recall- python aliased to python3" && python3'
 alias p="python"
-function ce {
-	# Create and edit.
+function cv {
+	# Create and edit with vim.
 	touch $1
 	vim $1
 }
 function cc {
-	# Create and edit.
+	# Create and edit with vs code.
 	touch $1
 	code $1
 }
 alias tree="tree -L "
 alias boy="tldr"
+alias rebuild_spotlight_index="sudo mdutil -E /"
+alias reset_dock="killall -KILL Dock"
 
 # Working Reset
 function true_reset {
@@ -41,13 +40,15 @@ web_path=$repos_path/Web/bpinzonegithubio
 window_path=$repos_path/Other/WindowManager
 vsccpp_path=$repos_path/vsccpp/
 pro_path=$repos_path/Other/Pro_Programming
+zelda_path=$repos_path/Classes/EECS494/Zelda
+falcon_path=$repos_path/Classes/EECS494/FalconMissile
 pinzone_w_path=$HOME/Dropbox/Main/Notes/pinzone_w.csv
 vim_cheat_path=$pro_path/vim_cheatsheet.txt
 bitbar_path=$HOME/Documents/BitBarPluggins
 lec_281_path=$HOME/Documents/@MAIN_DOCUMENTS/College/UM/Fall2017/EECS281NonRepo
 
 # Edit Specific Files
-alias bashprof="vim $HOME/.bash_profile"
+alias bp="vim $HOME/.bash_profile"
 alias vimrc="vim $HOME/.vimrc"
 alias todo="vim $macsetup_path/notes.txt"
 alias commands="vim $macsetup_path/commands.txt"
@@ -59,7 +60,8 @@ alias pinzone_w="vim $pinzone_w_path"
 # Manage Files
 # Clean VSCode C++ Project
 # Except delete git repo.
-function create_vsccpp {
+function cvsccpp {
+	# Create VSCode CPP project
 	cp -r $vsccpp_path ./new_vsccpp_project
 	rm -f ./new_vsccpp_project/.gitignore
 	rm -rf ./new_vsccpp_project/.git
@@ -92,12 +94,17 @@ alias macsetup="cd $macsetup_path"
 alias dotfiles="cd $dotfiles_path"
 alias web="cd $web_path"
 alias window="cd $window_path"
+alias pro="cd $pro_path"
 alias vsccpp="cd $vsccpp_path"
 alias bitbar="cd $bitbar_path"
 alias workdb="cd $HOME/Dropbox/Work"
 alias lec_281="cd $lec_281_path"
+alias zelda="cd $zelda_path"
+alias falcon="cd $falcon_path"
 
 alias o="open ./" # Open working directory in finder.
+alias c="code ." # Open current working dir in vs code.
+alias ca="code --add ." # Open current working dir in last active vs code window.
 function pj {
 	# cd to <class> <project> directory
 	# Usage pj <class number> <project number>
@@ -113,7 +120,6 @@ function pjo {
 	pj $1 $2
 	o
 }
-alias 490hw="cd $HOME/Documents/@MAIN_DOCUMENTS/College/UM/Fall2018/490nonrepo/hw"
 
 # Running
 alias rcp="clear && make clean && make && ./main"
@@ -174,6 +180,7 @@ alias gb="git branch"
 alias gd="git diff"
 alias eig="vim .gitignore"
 alias egig="vim $HOME/.gitignore_global"
+alias minor='git add . && git commit -m "minor" && git push'
 
 # Grep
 GREP_FLAGS="-r -n --color=auto"
@@ -196,7 +203,7 @@ alias cppgrep="gt cpp $1 $@"
 alias hgrep="gt h $1 $@"
 # Grep Specific Files
 function pinzone_w_grep {
-	grep -i -C5 $1 $pinzone_w_path
+	grep -i -C1 $1 $pinzone_w_path
 }
 function bashprof_grep {
 	grep -i -C1 $1 $HOME/.bash_profile
@@ -218,8 +225,9 @@ function fid {
 # code --add <dir> // Adds dir folder to last active window.
 alias vsdiff="code --diff $1 $2"
 
-# Unity Clean Shortcut
+# Unity
 alias scripts="cd Assets/Scripts/"
+alias unity_template="code /Applications/Unity/Unity.app/Contents/Resources/ScriptTemplates/81-C#\ Script-NewBehaviourScript.cs.txt"
 function clean_unity {
 	if [ -d "Library" ]; then
 		rm -r Library
