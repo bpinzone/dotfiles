@@ -193,6 +193,11 @@ alias gd="git diff"
 alias eig="vim .gitignore"
 alias egig="vim $HOME/.gitignore_global"
 alias minor='git add . && git commit -m "minor" && git push'
+function full {
+	git add .
+	git commit -m "$1"
+	git push
+}
 
 # Grep
 GREP_FLAGS="-r -n --color=auto"
