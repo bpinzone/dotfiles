@@ -56,6 +56,18 @@ alias short="code $macsetup_path/shortcuts.txt"
 alias jevent="code $journal_path/events.txt"
 alias mega="code $journal_path/mega-recollection.txt"
 alias pinzone_w="vim $pinzone_w_path"
+alias vimcheat="vim $vim_cheat_path"
+
+# Grep Specific Files
+function pwg {
+	grep -i -C1 $1 $pinzone_w_path
+}
+function bpg {
+	grep -i -C1 $1 $HOME/.bash_profile
+}
+function vcg {
+	grep -i -C1 $1 $vim_cheat_path
+}
 
 # Manage Files
 # Clean VSCode C++ Project
@@ -201,17 +213,6 @@ alias csgrep="gt cs $1 $@"
 alias pygrep="gt py $1 $@"
 alias cppgrep="gt cpp $1 $@"
 alias hgrep="gt h $1 $@"
-# Grep Specific Files
-function pinzone_w_grep {
-	grep -i -C1 $1 $pinzone_w_path
-}
-function bashprof_grep {
-	grep -i -C1 $1 $HOME/.bash_profile
-}
-alias viewvimcheat="vim $vim_cheat_path"
-function vimcheat {
-	grep -i -C1 $1 $vim_cheat_path
-}
 
 # Find
 function fid {
@@ -239,9 +240,6 @@ function clean_unity {
 		rm -r obj
 	fi
 }
-
-# Sublime Shortcut
-alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl $1"
 
 # Prompt
 # http://ezprompt.net
