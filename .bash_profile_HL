@@ -21,6 +21,9 @@ alias boy="tldr"
 alias rebuild_spotlight_index="sudo mdutil -E /"
 alias reset_dock="killall -KILL Dock"
 
+# Set Tab Name
+export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
+
 # Working Reset
 function true_reset {
 	clear && printf '\e[3J'
