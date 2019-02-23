@@ -50,7 +50,7 @@ lec_281_path=$HOME/Documents/@MAIN_DOCUMENTS/College/UM/Fall2017/EECS281NonRepo
 # Edit Specific Files
 alias bp="vim $HOME/.bash_profile"
 alias vimrc="vim $HOME/.vimrc"
-alias todo="vim $macsetup_path/notes.txt"
+alias todo="vim $macsetup_path/todo.txt"
 alias commands="vim $macsetup_path/commands.txt"
 alias short="code $macsetup_path/shortcuts.txt"
 alias jevent="code $journal_path/events.txt"
