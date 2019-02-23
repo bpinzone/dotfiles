@@ -58,6 +58,26 @@ alias mega="code $journal_path/mega-recollection.txt"
 alias pinzone_w="vim $pinzone_w_path"
 alias vimcheat="vim $vim_cheat_path"
 
+# Grep
+GREP_FLAGS="-r -n --color=auto"
+alias grep="grep $GREP_FLAGS"
+function gt {
+	# Grep files of certain type.
+	# Usage: greptype <file_extension> <search_text> <other flags> <other flags>...
+	local file_type="$1" && shift
+	local search_text="$1" && shift
+	if [ "$file_type" == "all" ] ; then
+		grep $GREP_FLAGS --include="*" "$search_text" . $@
+	else
+		grep $GREP_FLAGS --include="*.$file_type" "$search_text" . $@
+	fi
+}
+alias allgrep="gt all $1 $@"
+alias csgrep="gt cs $1 $@"
+alias pygrep="gt py $1 $@"
+alias cppgrep="gt cpp $1 $@"
+alias hgrep="gt h $1 $@"
+
 # Grep Specific Files
 function pwg {
 	grep -i -C1 $1 $pinzone_w_path
@@ -198,26 +218,6 @@ function full {
 	git commit -m "$1"
 	git push
 }
-
-# Grep
-GREP_FLAGS="-r -n --color=auto"
-alias grep="grep $GREP_FLAGS"
-function gt {
-	# Grep files of certain type.
-	# Usage: greptype <file_extension> <search_text> <other flags> <other flags>...
-	local file_type="$1" && shift
-	local search_text="$1" && shift
-	if [ "$file_type" == "all" ] ; then
-		grep $GREP_FLAGS --include="*" "$search_text" . $@
-	else
-		grep $GREP_FLAGS --include="*.$file_type" "$search_text" . $@
-	fi
-}
-alias allgrep="gt all $1 $@"
-alias csgrep="gt cs $1 $@"
-alias pygrep="gt py $1 $@"
-alias cppgrep="gt cpp $1 $@"
-alias hgrep="gt h $1 $@"
 
 # Find
 function fid {
