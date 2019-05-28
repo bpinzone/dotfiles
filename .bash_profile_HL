@@ -4,8 +4,6 @@ export LESS="-eirMX"
 
 # Misc
 alias reload="source $HOME/.bash_profile" # Reload bash profile.
-alias python='echo "Recall- python aliased to python3" && python3'
-alias p="python"
 function cv {
 	# Create and edit with vim.
 	touch $1
@@ -16,7 +14,7 @@ function cc {
 	touch $1
 	code $1
 }
-alias tree="tree -L "
+alias t="tree -L "
 alias boy="tldr"
 alias rebuild_spotlight_index="sudo mdutil -E /"
 alias reset_dock="killall -KILL Dock"
@@ -31,9 +29,14 @@ function true_reset {
 alias reset="true_reset"
 
 # Specific Directory Paths
+xcode_recent_path=/Applications/Xcode.app
+xcode_unreal_path=/Applications/Xcode_8.3.3.app
 desk_path=$HOME/Desktop
 downloads_path=$HOME/Downloads
-journal_path=$HOME/Dropbox/Main/Primary/Journal
+dropbox_path=$HOME/Dropbox
+notes_path=$dropbox_path/Main/Notes
+db_tmp_path=$dropbox_path/tmp
+journal_path=$dropbox_path/Main/PD_Important/Journal
 repos_path=$HOME/Documents/@MAIN_DOCUMENTS/@REPOS # REPOS: notes.txt and readme.txt - Nothing else
 multi_path=$repos_path/Unity/MultiplayerTanks
 snake_path=$repos_path/Unity/SnakeV2
@@ -41,16 +44,23 @@ macsetup_path=$repos_path/MyComputer/macsetup
 dotfiles_path=$repos_path/MyComputer/dotfiles
 web_path=$repos_path/Web/bpinzonegithubio
 window_path=$repos_path/Other/WindowManager
+caen_r_path=$repos_path/Other/Caen
 vsccpp_path=$repos_path/vsccpp/
 pro_path=$repos_path/Other/Pro_Programming
 zelda_path=$repos_path/Classes/EECS494/Zelda
 falcon_path=$repos_path/Classes/EECS494/FalconMissile
-pinzone_w_path=$HOME/Dropbox/Main/Notes/pinzone_w.csv
+flagshift_path=$repos_path/Classes/EECS494/FlagFrenzyFinal
+pinzone_w_path=$notes_path/pinzone_w.csv
 vim_cheat_path=$pro_path/vim_cheatsheet.txt
 bitbar_path=$HOME/Documents/BitBarPluggins
 lec_281_path=$HOME/Documents/@MAIN_DOCUMENTS/College/UM/Fall2017/EECS281NonRepo
 
+# Set active developer directory.
+alias recent_xcode="sudo xcode-select -s $xcode_recent_path"
+alias unreal_xcode="sudo xcode-select -s $xcode_unreal_path"
+
 # Edit Specific Files
+alias notes="code $notes_path"
 alias bp="vim $HOME/.bash_profile"
 alias vimrc="vim $HOME/.vimrc"
 alias todo="vim $macsetup_path/todo.txt"
@@ -58,7 +68,7 @@ alias commands="vim $macsetup_path/commands.txt"
 alias short="code $macsetup_path/shortcuts.txt"
 alias jevent="code $journal_path/events.txt"
 alias mega="code $journal_path/mega-recollection.txt"
-alias pinzone_w="vim $pinzone_w_path"
+alias pw="vim $pinzone_w_path"
 alias vimcheat="vim $vim_cheat_path"
 
 # Grep
@@ -83,7 +93,7 @@ alias hgrep="gt h $1 $@"
 
 # Grep Specific Files
 function pwg {
-	grep -i -C1 $1 $pinzone_w_path
+	grep -i $1 $pinzone_w_path
 }
 function bpg {
 	grep -i -C1 $1 $HOME/.bash_profile
@@ -93,9 +103,13 @@ function vcg {
 }
 
 # Manage Files
+# Dropbox
+function dbt {
+	cp *.$1 $db_tmp_path
+}
 # Clean VSCode C++ Project
 # Except delete git repo.
-function cvsccpp {
+function create_cvsccpp {
 	# Create VSCode CPP project
 	cp -r $vsccpp_path ./new_vsccpp_project
 	rm -f ./new_vsccpp_project/.gitignore
@@ -127,15 +141,18 @@ alias multi="cd $multi_path"
 alias snake="cd $snake_path"
 alias macsetup="cd $macsetup_path"
 alias dotfiles="cd $dotfiles_path"
+alias caen_r="cd $caen_r_path"
 alias web="cd $web_path"
 alias window="cd $window_path"
 alias pro="cd $pro_path"
 alias vsccpp="cd $vsccpp_path"
 alias bitbar="cd $bitbar_path"
-alias workdb="cd $HOME/Dropbox/Work"
+alias workdb="cd $dp_path/Work"
 alias lec_281="cd $lec_281_path"
 alias zelda="cd $zelda_path"
 alias falcon="cd $falcon_path"
+alias flagshift="cd $flagshift_path"
+alias dropbox="cd $dropbox_path"
 
 alias o="open ./" # Open working directory in finder.
 alias c="code ." # Open current working dir in vs code.
@@ -213,9 +230,14 @@ alias caenfile="sftp bpinzone@login.engin.umich.edu"
 alias gs="git status"
 alias gb="git branch"
 alias gd="git diff"
+alias gr="git reset --hard"
+alias git_hard="git reset --hard"
+alias gc="git clean -fd"
+alias grc="git reset --hard && git clean -fd"
 alias eig="vim .gitignore"
 alias egig="vim $HOME/.gitignore_global"
 alias minor='git add . && git commit -m "minor" && git push'
+alias gdraw="git --no-pager diff"
 function full {
 	git add .
 	git commit -m "$1"
@@ -236,7 +258,8 @@ alias vsdiff="code --diff $1 $2"
 
 # Unity
 alias scripts="cd Assets/Scripts/"
-alias unity_template="code /Applications/Unity/Unity.app/Contents/Resources/ScriptTemplates/81-C#\ Script-NewBehaviourScript.cs.txt"
+unity_template_path="/Applications/Unity/Hub/Editor/2019.1.2f1/Unity.app/Contents/Resources/ScriptTemplates/81-C#\ Script-NewBehaviourScript.cs.txt"
+alias unity_template="code $unity_template_path"
 function clean_unity {
 	if [ -d "Library" ]; then
 		rm -r Library
@@ -248,6 +271,10 @@ function clean_unity {
 		rm -r obj
 	fi
 }
+
+# Command Correction
+eval $(thefuck --alias)
+alias f="fuck"
 
 # Prompt
 # http://ezprompt.net
@@ -300,4 +327,7 @@ export PS1="\[\e[37m\]\u\[\e[m\]\[\e[31m\]@\[\e[m\]\[\e[37m\]\h\[\e[m\]\[\e[31;4
 
 # Remove last login info.
 reset
+
+# Run scripts
+# $macsetup_path/FileWatching/Starter.sh
 
