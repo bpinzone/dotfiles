@@ -2,7 +2,7 @@
 alias rebuild_spotlight_index="sudo mdutil -E /"
 alias reset_dock="killall -KILL Dock"
 
-# Set iterm tab name to current directory
+# Set iTerm tab name to current directory
 precmd() {
   echo -ne "\e]1;${PWD##*/}\a"
 }
@@ -44,6 +44,9 @@ function bpg {
 }
 function vcg {
 	grep -i -C1 $1 $vim_cheat_path
+}
+function sg {
+    grep -i -C1 $1 $macsetup_path/shortcuts.txt
 }
 
 # Shortcuts for common operations.
@@ -106,6 +109,9 @@ alias vsdiff="code --diff $1 $2"
 # Command Correction
 eval $(thefuck --alias)
 alias f="fuck"
+
+# Random
+alias math="$ZSH_CUSTOM/./bpzp_math.py"
 
 # Remove last login info.
 reset
