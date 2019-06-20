@@ -46,7 +46,10 @@ function vcg {
 	grep -i -C1 $1 $vim_cheat_path
 }
 function sg {
-    grep -i -C1 $1 $macsetup_path/shortcuts.txt
+    grep -iE $1 $macsetup_path/shortcuts.txt
+}
+function sgf {
+    grep -iE "f[0-9]+" $macsetup_path/shortcuts.txt
 }
 
 # Shortcuts for common operations.

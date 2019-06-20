@@ -20,7 +20,7 @@ caen_r_path=$repos_path/Other/Caen
 graphics_path=~/Documents/@MAIN_DOCUMENTS/College/Graphics
 
 # Reference
-pinzone_w_path=$notes_path/pinzone_w.csv
+pinzone_w_path=$notes_path/core/pinzone_w.csv
 vim_cheat_path=$pro_path/vim_cheatsheet.txt
 
 # Game Projects
@@ -29,6 +29,7 @@ snake_path=$repos_path/Unity/SnakeV2
 zelda_path=$repos_path/Classes/EECS494/Zelda
 falcon_path=$repos_path/Classes/EECS494/FalconMissile
 flagshift_path=$repos_path/Classes/EECS494/FlagFrenzyFinal
+hyper_path=$repos_path/Unity/Hyperspace
 
 # Computer Projects
 macsetup_path=$repos_path/MyComputer/macsetup

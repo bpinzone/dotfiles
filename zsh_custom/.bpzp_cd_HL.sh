@@ -20,7 +20,7 @@ function pjo {
 alias home="cd ~"
 alias desk="cd $desk_path"
 alias down="cd $downloads_path"
-alias zsh_custom="cd $zsh_custom_path"
+alias bpzp="cd $zsh_custom_path"
 
 # Dropbox
 alias dropbox="cd $dropbox_path"
@@ -39,6 +39,7 @@ alias snake="cd $snake_path"
 alias zelda="cd $zelda_path"
 alias falcon="cd $falcon_path"
 alias flagshift="cd $flagshift_path"
+alias hyper="cd $hyper_path"
 
 # Computer Projects
 alias macsetup="cd $macsetup_path"
