@@ -14,6 +14,9 @@ function pjo {
 	pj $1 $2
 	open .
 }
+function gp {
+    cd $graphics_repo_path/Graphics$1
+}
 
 # Change Directory to Specific Paths
 # Basic
@@ -27,6 +30,7 @@ alias dropbox="cd $dropbox_path"
 
 # Repos & Misc Projects
 alias repos="cd $repos_path"
+alias pp="cd $pp_path"
 alias caen_r="cd $caen_r_path"
 alias web="cd $web_path"
 alias pro="cd $pro_path"

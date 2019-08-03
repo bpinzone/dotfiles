@@ -13,21 +13,24 @@ journal_path=$dropbox_path/Main/PD_Important/Journal
 
 # Repos & Misc Projects
 repos_path=~/Documents/@MAIN_DOCUMENTS/@REPOS # REPOS: notes.txt and readme.txt - Nothing else
+pp_path=$repos_path/C++/ProgrammingPractice
 web_path=$repos_path/Web/bpinzonegithubio
 vsccpp_path=$repos_path/vsccpp/
 pro_path=$repos_path/Other/Pro_Programming
 caen_r_path=$repos_path/Other/Caen
 graphics_path=~/Documents/@MAIN_DOCUMENTS/College/Graphics
+graphics_repo_path=$repos_path/Graphics
 
 # Reference
-pinzone_w_path=$notes_path/core/pinzone_w.csv
+pinzone_w_path=$notes_path/other/pinzone_w.csv
 vim_cheat_path=$pro_path/vim_cheatsheet.txt
 
 # Game Projects
 multi_path=$repos_path/Unity/MultiplayerTanks
 snake_path=$repos_path/Unity/SnakeV2
 zelda_path=$repos_path/Classes/EECS494/Zelda
-falcon_path=$repos_path/Classes/EECS494/FalconMissile
+old_falcon_path=$repos_path/Classes/EECS494/FalconMissile
+falcon_path=$repos_path/Unity/FalconMissile2
 flagshift_path=$repos_path/Classes/EECS494/FlagFrenzyFinal
 hyper_path=$repos_path/Unity/Hyperspace
 

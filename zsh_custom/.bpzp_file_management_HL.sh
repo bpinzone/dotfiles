@@ -33,7 +33,7 @@ function sync_resume {
 
 # Unity
 alias scripts="cd Assets/Scripts/"
-unity_template_path="/Applications/Unity/Hub/Editor/2019.1.2f1/Unity.app/Contents/Resources/ScriptTemplates/81-C#\ Script-NewBehaviourScript.cs.txt"
+unity_template_path="/Applications/Unity/Hub/Editor/2019.1.8f1/Unity.app/Contents/Resources/ScriptTemplates/81-C#\ Script-NewBehaviourScript.cs.txt"
 alias unity_template="code $unity_template_path"
 function clean_unity {
 	if [ -d "Library" ]; then

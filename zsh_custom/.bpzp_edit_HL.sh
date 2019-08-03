@@ -14,6 +14,7 @@ function cc {
 # Notes
 alias notes="code $notes_path"
 alias jevent="code $journal_path/events.txt"
+alias jmevent="vim $journal_path/minievents.txt"
 alias mega="code $journal_path/mega-recollection.txt"
 alias pw="vim $pinzone_w_path"
 alias vimcheat="vim $vim_cheat_path"
